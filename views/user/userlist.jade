@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+    h1= 'oooo'
+    table
+        for message in userList
+            tr(hash="#{message._id}")
+                td
+                    input(value="#{message.username}")
+                td
+                    textarea= message.userage
+                td #{message.userage}
+
+    style(lang='stylus').
+        lable{
+            color: #00B7FF
+        }

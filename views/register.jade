@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    h1= title
+    h1= '注册'
+        div#alt_sucess #{locals.success} #{success}
+
+    form.form(action='')
+        div.lable
+            lable 用户名
+                input.name(type='text' name='name')
+        div.lable
+            lable 年龄
+                input(type='text' name='age')
+        div.lable
+            lable 密码
+                input(type='text' name='pasd')
+    div.but
+        button 注册
+    script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js').
+    script.
+        console.log('注册')
+        $(function () {
+            $('button').on('click', function (e) {
+                var data = {
+                    username: $('input[name=name]').val(),
+                    userage: $('input[name=age]').val(),
+                    userpwd: $('input[name=pasd]').val()
+                }
+                // e.preventDefault()
+                console.log('llllll', $('.name').val())
+                $.post('/register', {
+                  data,
+                }, function () {
+                  console.log('success')
+                })
+            })
+        })
+
+    style(lang='stylus').
+        lable{
+            color: #00B7FF
+        }
