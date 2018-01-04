@@ -7,6 +7,9 @@ routerUse.use('/', home);
 let signup = require('./users/signup');
 routerUse.use('/signup', signup);
 
+let login = require('./users/login');
+routerUse.use('/signup/login', login);
+
 let users = require('./users/users');
 let register = require('./users/register');
 let userlist = require('./users/userlist');

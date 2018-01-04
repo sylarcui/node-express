@@ -5,7 +5,6 @@ const resmsg = {
 	code: 200,
 	message: 'ok'
 }
-
 app.route('/')
 	// .get(function(req, res, next) {
 	// 	res.render('register', { title: '注册' })
