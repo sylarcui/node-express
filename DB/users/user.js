@@ -1,11 +1,12 @@
 import User from './userSchema'
+import crypto from "crypto";
 module.exports = {
 /**
 	 }
  * 插入  Model#save([fn])
  */
 insert: (data, callback) => {
-	data.logindate = new Date()
+  data.userPassword = crypto.createHmac('sha256', data.userPassword).digest('hex')
   let user = new User(data)
 	user.save(function (err, res) {
     if (err) {
@@ -22,7 +23,7 @@ insert: (data, callback) => {
 /**
  *更新  Model.update(conditions, update, [options], [callback])
  * */
-update: () => {
+update: (data, callback) => {
   let wherestr = {'username' : 'Tracy McGrady'}
   let updatestr = {'userpwd': 'zzzz'}
 
@@ -33,6 +34,7 @@ update: () => {
     else {
       console.log('Res:' + res)
     }
+	  callback(err, res)
   })
 },
 
@@ -43,17 +45,18 @@ update: () => {
  * Model.findByIdAndUpdate(id, [update], [options], [callback])
  * 这种比较有指定性，就是根据_id
  * */
-findByIdAndUpdate: () => {
-  let id = '5a46616117f4e9d0bfc73078'
-  let updatestr = {'userpwd': 'abcd'}
+findByIdAndUpdate: (data, callback) => {
+  // let id = '5a46616117f4e9d0bfc73078'
+  // let updatestr = {'userpwd': 'abcd'}
 
-  User.findByIdAndUpdate(id, updatestr, function(err, res){
+  User.findByIdAndUpdate(data.id, data.updatestr, function(err, res){
     if (err) {
       console.log('Error:' + err)
     }
     else {
       console.log('Res:' + res)
     }
+	  callback(err, res)
   })
 },
 

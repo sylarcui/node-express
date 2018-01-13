@@ -1,16 +1,21 @@
 import express from 'express'
 import User from '../../DB/users/user'
+import respones from '../../controllers/response'
 const app = express()
-const resmsg = {
-	code: 200,
-	message: 'ok'
-}
 app.route('/')
 	// .get(function(req, res, next) {
 	// 	res.render('register', { title: '注册' })
 	// })
 	.post(function(req, res, next) {
 		let data = req.body
+		if (data.account.trim() === '') {
+			res.send(respones.resMsg({results: '用户名不能为空'}));
+			return
+		}
+		if (!data.userPassword) {
+			res.send(respones.resMsg({results: '密码不能为空'}));
+			return
+		}
 		data.createDte = Date.now()
 		console.log(req.body, 'req.body.data')
 		let wherestr = {'account' : req.body.account}
@@ -32,8 +37,7 @@ app.route('/')
 					res.locals.error = err;
 					next(err)
 				} else {
-					resmsg.data = results
-					res.send(resmsg);
+					res.send(respones.resMsg({results}));
 				}
 			})
 		})

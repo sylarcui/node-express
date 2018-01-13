@@ -24,7 +24,7 @@ var UserSchema = new Schema({
 	type: {type: String, default: 'normal'},
 	avatarUrl: {type: String},
 	userAge: {type: Number},
-	createDte: {type: Date, default:Date.now},
+	createDte: {type: Date},
   userPassword: {type: String},
   loginDate: { type: Date, default:Date.now}                       //最近登录时间
 })
